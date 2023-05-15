@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Think Later</title>
+        <style>
+            body {
+                padding: 0;
+            }
+            #logo {
+                height: 100px;
+                display: block;
+                aspect-ratio: 1;
+                border-radius: 1em;
+                border: 1px solid transparent;
+            }
+
+            .container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .content {
+                width: 100%;
+                padding: 1em;
+                border-left: #444 solid 1px;
+                border-right: #444 solid 1px;
+            }
+
+            .section {
+                width: 80%;
+                min-width: 80em;
+                display: flex;
+            }
+
+            .section::before {
+                content: ' ' ;
+                background: linear-gradient(90deg, rgba(0,0,0,0), #808080);
+                width: 1em;
+                display: block;
+            }
+            .section::after {
+                content: ' ' ;
+                background: linear-gradient(270deg, rgba(0,0,0,0), #808080);
+                width: 1em;
+                display: block;
+            }
+
+            .navigation {
+                padding: 0.2em;
+                height: fit-content;
+                width: 100%;
+                display: flex;
+                background: linear-gradient(0deg, #6363FF,#481374);
+            }
+            .navigation a {
+                padding: 1em;
+                height: 100%;
+                font-size: large;
+                text-decoration: none;
+                color: #FFF;
+                border: 1px solid white;
+                margin: 0 0.25em 0 0
+            }
+            .navigation a.selected {
+                padding: 1em;
+                height: 100%;
+                font-size: large;
+                text-decoration: none;
+                color: #FFF;
+                background-color: rgba(255,255,255,0.4);
+                border: 1px solid white;
+                margin: 0 0.25em 0 0
+            }
+            .header {
+                width: 100%;
+                padding: 0.2em;
+                display: flex;
+                flex-direction: row;
+                vertical-align: bottom;
+                background: linear-gradient(#000, #222);
+            }
+
+            h1 {
+                display: block;
+                height: fit-content;
+                margin: auto 0 auto 0.5em;
+                font-size: 4em;
+                font-weight: 600;
+            }
+
+            .accent_light {
+                color: #6363FF;
+            }
+            .accent_dark {
+                color: #481374;
+            }
+
+            .footer {
+                background: #444;
+                min-height: 10em;
+            }
+
+            .footer > .section::before {
+                content: none;
+            }
+
+            .footer > .section::after {
+                content: none;
+            }
+
+            .footer > .section > .content {
+                text-align: center;
+                color: white;
+            }
+            .column2 {
+                columns: 2;
+                column-fill: balance;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="section">
+                <div class="header">
+                    <img src="https://thinklater.site/images/thinklater-1024@1x.png" id="logo"><h1><span class="accent_light">Think</span> <span class="accent_dark">Later</span></h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="section">
+                <div class="navigation">
+                    <a href="#" class="selected">Home</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">About</a>
+                </div>
+            </div>
+            <div class="section">
+                <div class="content column2">
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <h2>Comming soon!</h2>
+                    <p>Think Later is an app where one can send an email to oneself with thoughts which should be taken care later. An example of such of thoughts, is thoughts regarding work appearing on your freetime.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container footer">
+            <div class="section">
+                <div class="content">
+                    <p>&copy; Copyright 2023 Think Later - All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
