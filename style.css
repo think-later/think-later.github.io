@@ -124,3 +124,7 @@ h1 {
     height: 800px;
     padding: 0;
 }
+
+.column-img {
+    max-width: 45%;
+}
