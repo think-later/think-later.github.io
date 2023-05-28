@@ -3,21 +3,29 @@
     <head>
         <title>Think Later</title>
         <link href="style.css" rel="stylesheet" />
+        <link href="style-mobile.css" rel="stylesheet" media="screen and (max-width: 40em)" />
     </head>
     <body>
+        <div class="container"></div>
         <div class="container">
             <div class="section">
                 <div class="header">
-                    <img src="images/thinklater-96@2x.png" id="logo"><h1><span class="accent_light">Think</span> <span class="accent_dark">Later</span></h1>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="section">
-                <div class="navigation">
-                    <a href="#" class="selected">Home</a>
-                    <a href="privacy-policy.html">Privacy Policy</a>
-                    <a href="about.html">About</a>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 20" preserveAspectRatio="xMinYMin meet">
+                        <mask id="rounded">
+                            <rect width="20" height="20" rx="2" fill="white" />
+                        </mask>
+                        <image href="images/thinklater-96@2x.png" width="20" height="20" mask="url(#rounded)" />
+                        <text x="24" y="16"><tspan class="accent_light">Think</tspan>&nbsp;<tspan class="accent_dark">Later</tspan></text>
+                    </svg>
+                    <input id="menu-toggle" type="checkbox" />
+                    <label class="menu-button-container" for="menu-toggle">
+                        <div class="menu-button"></div>
+                    </label>
+                    <div class="navigation">
+                        <a href="#" class="selected">Home</a>
+                        <a href="privacy-policy.html">Privacy&nbsp;Policy</a>
+                        <a href="about.html">About</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,9 +41,10 @@
             <div class="section">
                 <div class="content">
                     <h2> Metrics</h2>
-                    <iframe src="https://eu.mixpanel.com/p/UUQHSX7525LVTVjajhYvYK?embed=true&passcode=thinklater">
+                    <p>Live metrics can be found at <a href="https://eu.mixpanel.com/p/UUQHSX7525LVTVjajhYvYK?embed=true&passcode=thinklater">MixPanel</a></p>
+                    <!-- <iframe src="https://eu.mixpanel.com/p/UUQHSX7525LVTVjajhYvYK?embed=true&passcode=thinklater">
 
-                    </iframe>
+                    </iframe> -->
                 </div>
             </div>
         </div>
