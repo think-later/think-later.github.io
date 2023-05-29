@@ -161,3 +161,7 @@ h1 {
 .menu-button-container {
     display: none;
 }
+
+.text-column {
+    break-inside: avoid-column;
+}
