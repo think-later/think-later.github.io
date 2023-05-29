@@ -1,0 +1,139 @@
+
+.resolution {
+    background-color: gray;
+}
+/* 4+ */
+@media (-webkit-min-device-pixel-ratio: 3.5), (min-resolution: 3.5dppx), (-moz-min-device-pixel-ration: 3.5) {
+    .content {
+        font-size: 1em;
+    }
+
+    .navigation {
+        font-size: 1em;
+    }
+
+    .navigation a {
+        font-size: unset;
+        border-width: 1px;
+        border-radius: 2px;
+    }
+    .navigation a.selected {
+        font-size: unset;
+        border-width: 1px;
+        border-radius: 2px;
+    }
+
+    .menu-button,
+    .menu-button::before,
+    .menu-button::after {
+        height: 4px;
+        border-radius: 2px;
+    }
+
+    .resolution {
+        color: aqua;
+    }
+}
+
+
+/* 3 */
+@media (-webkit-max-device-pixel-ratio: 3.5), (max-resolution: 3.5dppx), (-moz-max-device-pixel-ration: 3.5) {
+    .content {
+        font-size: 3em;
+    }
+
+    .navigation {
+        font-size: 3em;
+    }
+
+    .navigation a {
+        font-size: unset;
+        border-width: 3px;
+        border-radius: 6px;
+    }
+    .navigation a.selected {
+        font-size: unset;
+        border-width: 3px;
+        border-radius: 6px;
+    }
+
+    .menu-button,
+    .menu-button::before,
+    .menu-button::after {
+        height: 12px;
+        border-radius: 6px;
+    }
+
+    .resolution {
+        color: greenyellow;
+    }
+}
+
+/* 2 */
+@media (-webkit-max-device-pixel-ratio: 2.5), (max-resolution: 2.5dppx), (-moz-max-device-pixel-ration: 2.5) {
+    .content {
+        font-size: 2em;
+    }
+
+    .navigation {
+        font-size: 2em;
+    }
+
+    .navigation a {
+        font-size: unset;
+        border-width: 2px;
+        border-radius: 4px;
+    }
+    .navigation a.selected {
+        font-size: unset;
+        border-width: 2px;
+        border-radius: 4px;
+    }
+
+    .menu-button,
+    .menu-button::before,
+    .menu-button::after {
+        height: 8px;
+        border-radius: 4px;
+    }
+    .resolution {
+        color: orange;
+    }
+  }
+
+/* 1 */
+@media (-webkit-max-device-pixel-ratio: 1.5), (max-resolution: 1.5dppx), (-moz-max-device-pixel-ration: 1.5) {
+    .content {
+        font-size: 1em;
+    }
+
+    .navigation {
+        font-size: 1em;
+    }
+
+    .navigation a {
+        font-size: large;
+        border-width: 1px;
+        border-radius: 2px;
+    }
+    .navigation a.selected {
+        font-size: unset;
+        border-width: 1px;
+        border-radius: 2px;
+    }
+
+    .menu-button,
+    .menu-button::before,
+    .menu-button::after {
+        height: 4px;
+        border-radius: 2px;
+    }
+
+    .resolution {
+        color: purple;
+    }
+  }
+
+
+
+  
