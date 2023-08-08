@@ -1,1 +1,2 @@
-include: [ './well-known/microsoft-identity-association.json' ]
+include: 
+  - ./well-known/microsoft-identity-association.json
