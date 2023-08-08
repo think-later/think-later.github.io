@@ -1,3 +1,7 @@
 include: 
   - ./.well-known/microsoft-identity-association.json
   - ./.well-known
+
+keep_files:
+  - ./.well-known/microsoft-identity-association.json
+  - ./.well-known
