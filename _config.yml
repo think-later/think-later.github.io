@@ -1,10 +1,9 @@
 include: 
-  - ./static/.well-known/microsoft-identity-association.json
-  - ./static/.well-known
-  - ./static
+  - ./.well-known/microsoft-identity-association.json
+  - ./.well-known
 
 keep_files:
-  - ./static/.well-known/microsoft-identity-association.json
-  - ./static/.well-known
-  - ./static
+  - ./.well-known/microsoft-identity-association.json
+  - ./.well-known
 
+verbose: true
