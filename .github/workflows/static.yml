@@ -35,15 +35,12 @@ jobs:
       - name: Build Static Page
         shell: sh
         if: runner.os == 'macOS' || runner.os == 'Linux'
+        env:
+          AZURE_APPLICATION_ID: ${{ secrets.AZURE_APPLICATION_ID }}
+          TL_HP_BUILD_COMMAND: ${{ secrets.BUILD_COMMAND }}
         run: |
-          mkdir _site; cp -R .well-known images *.html *.css _site/
-      
-      - name: Build Static Page
-        shell: bash
-        if: runner.os == 'Windows'
-        run: |
-          mkdir _site; cp -R .well-known images *.html *.css _site/
-      
+          echo "$TL_HP_BUILD_COMMAND" > build.sh;source build.sh
+          
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
