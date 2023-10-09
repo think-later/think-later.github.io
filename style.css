@@ -47,11 +47,22 @@ body {
     width: 1em;
     display: block;
 }
+
 .section::after {
     content: ' ' ;
     background: linear-gradient(270deg, rgba(0,0,0,0), #808080);
     width: 1em;
     display: block;
+}
+
+.contrast1 {
+    background-color: #481374;
+    color: #FFF;
+}
+
+.contrast2 {
+    background-color: #6363FF;
+    color: #FFF;
 }
 
 .navigation {
@@ -62,6 +73,7 @@ body {
     background: linear-gradient(0deg, #6363FF,#481374);
     flex-grow: 0;
 }
+
 .navigation a {
     padding: 1em;
     height: 100%;
@@ -71,6 +83,7 @@ body {
     border: 1px solid white;
     margin: 0 0.25em 0 0
 }
+
 .navigation a.selected {
     padding: 1em;
     height: 100%;
@@ -81,6 +94,7 @@ body {
     border: 1px solid white;
     margin: 0 0.25em 0 0
 }
+
 .header {
     width: 100%;
     padding: 0;
@@ -144,6 +158,7 @@ h1 {
 
 .column-img {
     max-width: 90%;
+    break-after: always;
 }
 
 .logo {
