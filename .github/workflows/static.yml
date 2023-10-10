@@ -39,7 +39,6 @@ jobs:
           AZURE_APPLICATION_ID: ${{ secrets.AZURE_APPLICATION_ID }}
           TL_HP_BUILD_COMMAND: ${{ secrets.BUILD_COMMAND }}
         run: |
-          echo "$TL_HP_BUILD_COMMAND"
           echo "$TL_HP_BUILD_COMMAND" > build.sh;chmod +x build.sh;./build.sh
           
       - name: Setup Pages

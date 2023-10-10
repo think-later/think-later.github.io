@@ -1,7 +1,5 @@
 
-.resolution {
-    background-color: gray;
-}
+
 /* 4+ */
 @media (-webkit-min-device-pixel-ratio: 3.5), (min-resolution: 3.5dppx), (-moz-min-device-pixel-ration: 3.5) {
     .content {
