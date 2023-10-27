@@ -31,6 +31,10 @@
     .resolution {
         color: aqua;
     }
+
+    #snackbar {
+        font-size: 1em;
+    }
 }
 
 
@@ -65,6 +69,10 @@
     .resolution {
         color: greenyellow;
     }
+
+    #snackbar {
+        font-size: 3em;
+    }
 }
 
 /* 2 */
@@ -96,6 +104,10 @@
     }
     .resolution {
         color: orange;
+    }
+
+    #snackbar {
+        font-size: 2em;
     }
   }
 
@@ -129,6 +141,10 @@
 
     .resolution {
         color: purple;
+    }
+
+    #snackbar {
+        font-size: 1em;
     }
   }
 
