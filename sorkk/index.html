@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8" />
+
+  <head>
+    <title>SORKK</title>
+    <link href="manifest.json" rel="manifest" />
+    <link href="../style.css" rel="stylesheet" />
+    <link
+      href="../style-mobile.css"
+      rel="stylesheet"
+      media="(max-width: 980px)"
+    />
+    <link href="../style-resolution.css" rel="stylesheet" />
+    <style type="text/css">
+      /* * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body,
+      div {
+        padding: 0;
+        margin: 0;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+      }
+
+      html,
+      body {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        word-wrap: break-word;
+        hyphens: auto;
+      }
+
+      #header {
+        background-color: #3030bb;
+        color: antiquewhite;
+        justify-content: center;
+        display: flex;
+        width: 100%;
+      }
+
+      a {
+        color: chocolate;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 80em;
+        padding: 0.5em;
+      }
+
+      #section,
+      #toolbox,
+      #footer {
+        background-color: lightgray;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+      }
+
+      #toolbox {
+        background-color: #3030bb;
+      }
+
+      #section > .container {
+        padding: 1em 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: space-around;
+        flex-grow: 1;
+      }
+
+      #section {
+        flex-grow: 1;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+      }
+
+      #toolbox > .container {
+        padding: 1em 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #shareSorkk > h3 {
+        color: antiquewhite;
+      }
+
+      #footer > .container {
+        padding: 1em 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      #footer {
+        background-color: black;
+        color: antiquewhite;
+      }
+
+      .card {
+        flex-basis: 15em;
+        min-height: 15em;
+        max-height: 40em;
+        border-radius: 0.5em;
+        padding: 0.5em 1em;
+
+        background-color: white;
+        margin: 0.2em;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        align-self: stretch;
+      }
+
+      .card > h2 {
+        padding-top: 0;
+        margin-top: 0;
+        color: #0c0c0c;
+        font-variant-caps: small-caps;
+        font-weight: 100;
+      }
+
+      .card > h3 {
+        padding-top: 0;
+        color: #0c0c0c;
+        font-variant-caps: small-caps;
+        font-weight: 100;
+        margin-bottom: 0;
+      }
+
+      .card > h2 + h3 {
+        margin-top: 0;
+      }
+
+      .card > p {
+        padding: 0.2em;
+        margin-top: 0;
+        background-color: #f8f8f8;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      textarea {
+        flex-grow: 1;
+        resize: vertical;
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+
+      #toolbar.container {
+        flex-grow: 0;
+      }
+
+      #addRow {
+        padding: 1em;
+        margin: 1em;
+        justify-content: center;
+        align-items: center;
+        display: flow-root;
+        flex-wrap: wrap;
+        flex-shrink: 1;
+        height: fit-content;
+        background-color: #f8f8f8;
+        border-radius: 0.5em;
+      }
+
+      #addRow > button {
+        margin: 0.25em;
+        height: 3em;
+      }
+
+      #spacer {
+        flex-grow: 1;
+        min-height: 8em;
+        width: 100%;
+      }
+
+      #tableContainer.container {
+        overflow-x: auto;
+        display: flow-root;
+        padding: 1em;
+      }
+
+      #tableContainer.hide {
+        display: none;
+      }
+
+      table {
+        background-color: white;
+        display: table;
+        height: max-content;
+        width: inherit;
+        margin: 0 0.2em;
+      }
+
+      th {
+        font-weight: 100;
+        background-color: #3030bb;
+        color: antiquewhite;
+      }
+
+      td {
+        word-wrap: wrap;
+        word-break: normal;
+        white-space: pre-wrap;
+        vertical-align: baseline;
+      }
+
+      tr:nth-child(odd) {
+        background-color: #f8f8f8;
+      }
+
+      tr:hover {
+        background-color: beige;
+      }
+
+      tr.selected {
+        background-color: cadetblue;
+      }
+
+      pre {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+      }
+
+      @media print {
+        #sorkkTable {
+          display: none;
+        }
+        table {
+          display: none;
+        }
+        #footer {
+          display: none;
+        }
+
+        #toolbox {
+          display: none;
+        }
+        #addRow {
+          display: none;
+        }
+        h1 {
+          font-size: small;
+        }
+        #header .container p {
+          display: none;
+        }
+        /* #section > .container {
+                display: none;
+            } 
+        #toolbar.container {
+          display: none;
+        }
+        #tableContainer.container {
+          display: none;
+        }
+        #cardDeck.container {
+          flex-wrap: nowrap;
+          flex-grow: 1;
+        }
+        #section {
+          flex-grow: 1;
+        }
+
+        .card {
+          border: #0c0c0c solid 1pt;
+          flex-grow: 1;
+          min-height: auto;
+
+          max-height: none;
+        }
+        #cardDeck {
+          height: 100%;
+          display: flex;
+        }
+        #spacer {
+          /* border: 1pt solid cyan 
+          display: none;
+        }
+        .card > h2 {
+          font-size: medium;
+        }
+        .card > h3 {
+          font-size: small;
+        }
+      } */
+    </style>
+    <script type="text/javascript" src="pako.min.js"></script>
+    <script type="text/javascript" src="jszip.min.js"></script>
+    <script type="text/javascript" src="FileSaver.min.js"></script>
+    <script type="text/javascript" src="xlxport.js"></script>
+    <script type="text/javascript" src="base64.js"></script>
+    <script type="text/javascript" src="io.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+
+  <body onload="init()">
+    <div class="container">
+      <div class="section">
+        <div class="header">
+          <div class="logo">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              viewBox="0 0 120 20"
+              preserveAspectRatio="xMinYMin meet"
+            >
+              <mask id="rounded">
+                <rect width="20" height="20" rx="2" fill="white" />
+              </mask>
+              <image
+                href="../images/sorkk.svg"
+                width="20"
+                height="20"
+                mask="url(#rounded)"
+                transform="scale(-1,1) translate(-20,0)"
+              />
+              <text x="24" y="13">
+                <tspan class="accent_dark medium">SORKK</tspan>
+              </text>
+              <text x="24" y="18">
+                <tspan class="accent_light small">
+                  en beteende&shy;analytisk modell
+                </tspan>
+              </text>
+            </svg>
+          </div>
+          <input id="menu-toggle" type="checkbox" />
+          <label class="menu-button-container" for="menu-toggle">
+            <div class="menu-button"></div>
+          </label>
+          <div class="navigation">
+            <a href="javascript:newSORKK()">Nytt Dokument</a>
+            <a href="javascript:hideAllSORKKs()" class="viewModeOnly hide"
+              >Ny SORKK</a
+            >
+            <a href="javascript:saveSORKKToList()" class="editModeOnly"
+              >Spara Till Lista</a
+            >
+            <a href="javascript:loadSORKK()" class="">Ladda in SORKK</a>
+            <a href="javascript:showAllSORKKs()" class="editModeOnly"
+              >Visa alla SORKK:ar (<span id="sorkkCount">0</span>)</a
+            >
+            <a href="javascript:hideAllSORKKs()" class="viewModeOnly hide"
+              >Dölj alla SORKK:ar</a
+            >
+            <a
+              href="javascript:exportXLSX('sorkkTable', 'Sorkk.xlsx')"
+              class="viewModeOnly readOnly hide"
+              >Exportera till Excel</a
+            >
+            <a href="javascript:shareSORKK()">Dela Länk&nbsp;<input type="text" id="link" readonly="true" /></a>
+          </div>
+          <div class="" id="snackbar">
+            <div id="error">
+              <p><span id="errorMessage">Test</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container main">
+      <div class="slim section">
+        <div class="content">
+          <div class="info">
+            <p>
+              Situation, Objekt, Reaktion, Konsekvens (kortsiktig), Konsekvens
+              (Långsiktig)
+              <a href="javascript:readMoreSORKK();" id="showInformation"
+                >Visa introduktion</a
+              ><a
+                href="javascript:readMoreSORKK();"
+                class="hide"
+                id="hideInformation"
+                >Dölj</a
+              >
+            </p>
+            <div id="readMoreSORKK" class="hide">
+              <h2>Situation (omständigheter, utlösande faktor):</h2>
+              <p>
+                Här tar du upp de situationer då du prokrastinering genom att för
+                varje situation skriva upp:
+              </p>
+              <ul>
+                <li>När hände det?</li>
+                <li>Var hände det?</li>
+                <li>Vad hände innan?</li>
+              </ul>
+
+              <h2>
+                Objekt (Automatisk tanke, känsla, fysiologiska reaktioner i
+                kroppen):
+              </h2>
+              <p>
+                Här ska du identifiera de reaktioner som väcks inom dig som leder
+                till att du prokrastinerar genom att ta upp:
+              </p>
+              <ul>
+                <li>
+                  Automatiska tankar:
+                  <ul>
+                    <li>
+                      Vad fick du för tanke, bild eller minne? Tankar kan vara
+                      både i form av ord (t. ex. ”Jag klarar ingenting” eller
+                      ”Ingen uppskattar mig” etc.), inre bilder (t.ex. att se en
+                      inre bild av sig själv som nedvärderad, misslyckad, etc.),
+                      eller minnen (t.ex. minnen av att ha blivit utskrattad,
+                      kritiserad eller bortgjord etc).
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  Känslor:
+                  <ul>
+                    <li>
+                      Vad upplevde du för känsla? Känslor kan beskrivas med ett
+                      ord (t.ex. arg, irriterad, glad, ledsen, förbannad, sorgsen,
+                      ångestfylld, rädd, orolig, panikslagen, skamsen, besviken,
+                      skuldfylld, äcklad, generad, intresserad, lugn, sårad osv.).
+                    </li>
+                    <li>Hur stark var den känslan (0-10)?</li>
+                    <li>Hur länge satt den i?</li>
+                  </ul>
+                </li>
+
+                <li>
+                  Fysiologiska reaktioner i kroppen:
+                  <ul>
+                    <li>
+                      beskriv de sensationer du kände i kroppen (t.ex. yrsel,
+                      huvudvärk, hjärtklappning, tryck över bröstet, magont,
+                      anspänning osv.)
+                    </li>
+                    <li>
+                      Skatta hur störande eller jobbiga dessa upplevelser var på
+                      en skala från 0 (inte jobbiga alls) – 10 (extremt jobbiga)
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <h2>Reaktion (beteende, handling):</h2>
+              <p>
+                Här ska du ta upp vad du faktiskt gjorde till följd av tankarna
+                och känslorna.
+              </p>
+              <h2>Konsekvens (kortsiktig)</h2>
+              <p>
+                Vilket resultat blir det för dig direkt efter beteendet? Det som
+                händer i och utanför dig när du genomfört ditt valda beteende
+                (kanske slipper jobbiga känslor, blir av med ett inre tryck,
+                etc.). Skriv ned vilka konsekvenser detta beteende får på kort
+                sikt (kanske slipper jobbiga känslor, får min vilja igenom, blir
+                av med ett inre tryck, vinner konflikten etc.) och på lång sikt
+                (Vad gör detta beteende med trygghet, tillit och kärlek i min
+                relation?).
+              </p>
+              <h2>Konsekvens (Långsiktig)</h2>
+              <p>
+                Vilka konsekvenser som drabbar dig på sikt? Det som händer i och
+                utanför dig när du genomfört ditt valda beteende på längre sikt
+                (Vad gör detta beteende med trygghet, resultatet, prestation?).
+              </p>
+              <p>
+                Text av Aseel Berglund hämtad från
+                <a href="https://www.ida.liu.se/~TDDD84/sjalvmotivation/SORKK.pdf"
+                  >https://www.ida.liu.se/~TDDD84/sjalvmotivation/SORKK.pdf</a
+                >
+                den 24 November 2022.
+              </p>
+
+              <p><a href="javascript:readMoreSORKK();">Dölj information.</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="content" id="cardDeck">
+          <div class="card">
+            <h2>Ingående Känsla</h2>
+            <textarea id="ingoingFeeling" class="editModeOnly"></textarea>
+            <p id="ingoingFeelingP" class="viewModeOnly readOnly hide"></p>
+          </div>
+          <div class="card">
+            <h2>Situation</h2>
+            <textarea id="situation" class="editModeOnly"></textarea>
+            <p id="situationP" class="viewModeOnly readOnly hide"></p>
+          </div>
+          <div class="card">
+            <h2>Organism</h2>
+            <h3>Vad tänker jag?</h3>
+            <textarea id="whatDoIThink" class="editModeOnly"></textarea>
+            <p id="whatDoIThinkP" class="viewModeOnly readOnly hide"></p>
+            <h3>Vad känner jag?</h3>
+            <textarea id="whatDoIFeel" class="editModeOnly"></textarea>
+            <p id="whatDoIFeelP" class="viewModeOnly readOnly hide"></p>
+            <h3>Vad får jag för fysiska reaktioner?</h3>
+            <textarea id="bodyReactions" class="editModeOnly"></textarea>
+            <p id="bodyReactionsP" class="viewModeOnly readOnly hide"></p>
+          </div>
+          <div class="card">
+            <h2>Reaktion</h2>
+            <textarea id="reaction" class="editModeOnly"></textarea>
+            <p id="reactionP" class="viewModeOnly readOnly hide"></p>
+          </div>
+          <div class="card">
+            <h2>Konsekvens</h2>
+            <h3>Kort Konsekvens</h3>
+            <textarea id="shortConsequence" class="editModeOnly"></textarea>
+            <p id="shortConsequenceP" class="viewModeOnly readOnly hide"></p>
+            <h3>Långsiktig Konsekvens</h3>
+            <textarea id="longConsequence" class="editModeOnly"></textarea>
+            <p id="longConsequenceP" class="viewModeOnly readOnly hide"></p>
+          </div>
+        </div>
+      </div>
+      <div class="hide section" id="tableContainer">
+        <div class="content">
+          <table id="sorkkTable" class="transpose">
+            <thead>
+              <tr>
+                <th scope="col">Ingående Känsla</th>
+                <th scope="col">Situation</th>
+                <th colspan="3" scope="colgroup">Organism</th>
+                <th scope="col">Reaktion</th>
+                <th colspan="2" scope="colgroup">Konsekvens</th>
+              </tr>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">Vad tänker jag?</th>
+                <th scope="col">Vad känner jag?</th>
+                <th scope="col">Vad får jag för fysiska reaktioner?</th>
+                <th scope="col"></th>
+                <th scope="col">Kort</th>
+                <th scope="col">Lång</th>
+              </tr>
+            </thead>
+            <tbody id="sorkkTableBody"></tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        
+      </div>
+      <div class="section">
+      <div class="content spacer"></div>
+    </div>
+    </div>
+    <div class="container footer">
+      <div class="section">
+        <div class="content">
+          <p>Skapad av: Patrik Andersson 2023</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

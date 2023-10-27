@@ -133,5 +133,9 @@
   }
 
 
-
-  
+/* SORKK */
+@media (min-width: 981px) and (max-width: 1370px) {
+    #cardDeck {
+        grid-template-columns: auto auto auto;
+    }
+}

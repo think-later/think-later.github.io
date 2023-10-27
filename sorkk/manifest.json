@@ -1,0 +1,14 @@
+{
+    "name": "SORKK",
+    "icons": [
+      {
+        "src": "../images/sorkk.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "description": "Ett vertyg för att analysera beteendemönster"
+  }
+  

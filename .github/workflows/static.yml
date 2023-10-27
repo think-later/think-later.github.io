@@ -37,7 +37,7 @@ jobs:
         if: runner.os == 'macOS' || runner.os == 'Linux'
         env:
           AZURE_APPLICATION_ID: ${{ secrets.AZURE_APPLICATION_ID }}
-          TL_HP_BUILD_COMMAND: ${{ secrets.BUILD_COMMAND }}
+          TL_HP_BUILD_COMMAND: ${{ vars.BUILD_COMMAND }}
         run: |
           echo "$TL_HP_BUILD_COMMAND" > build.sh;chmod +x build.sh;./build.sh
           
