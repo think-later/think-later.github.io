@@ -21,7 +21,7 @@
     display: none;
 }
 
-.navigation a {
+.navigation a, label[for|="tab"] {
     margin: 1px 0.25em 1px 0.25em;
 }
 
@@ -196,4 +196,11 @@ tr:last-child td + td {
     width: 100%;
     max-width: 100%;
     border-radius: 0;
+}
+.buttons {
+    flex-wrap: wrap;
+}
+.buttons a {
+    width: 100%;
+    margin: 0.2em;
 }

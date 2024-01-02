@@ -324,6 +324,9 @@
   </head>
 
   <body onload="init()">
+    <input type="radio" id="tab-form" name="tab" value="form" checked="true" />
+    <input type="radio" id="tab-table" name="tab" value="table" />
+    <input type="radio" id="tab-help" name="tab" value="help" />
     <div class="container">
       <div class="section">
         <div class="header">
@@ -360,25 +363,37 @@
           </label>
           <div class="navigation">
             <a href="javascript:newSORKK()">Nytt Dokument</a>
+            <a href="javascript:loadSORKK()" class="">Ladda in SORKK</a>
+            <label for="tab-form">Formulär</label>
+
+            <label for="tab-table"
+              >Visa alla (<span id="sorkkCount">0</span>)</label
+            >
+            <!--
+            <label for="tab-help">Information</label>
             <a href="javascript:hideAllSORKKs()" class="viewModeOnly hide"
               >Ny SORKK</a
             >
-            <a href="javascript:saveSORKKToList()" class="editModeOnly"
+            -->
+            <!-- <a href="javascript:saveSORKKToList()" class="editModeOnly"
               >Spara Till Lista</a
-            >
-            <a href="javascript:loadSORKK()" class="">Ladda in SORKK</a>
+            
             <a href="javascript:showAllSORKKs()" class="editModeOnly"
-              >Visa alla SORKK:ar (<span id="sorkkCount">0</span>)</a
-            >
+              >Visa alla SORKK:ar
+            </a>
             <a href="javascript:hideAllSORKKs()" class="viewModeOnly hide"
               >Dölj alla SORKK:ar</a
             >
+            > -->
+            
             <a
               href="javascript:exportXLSX('sorkkTable', 'Sorkk.xlsx')"
               class="viewModeOnly readOnly hide"
               >Exportera till Excel</a
             >
-            <a href="javascript:shareSORKK()">Dela Länk&nbsp;<input type="text" id="link" readonly="true" /></a>
+            <a href="javascript:shareSORKK('link')"
+              >Dela Länk&nbsp;<input type="text" id="link" readonly="true"
+            /></a>
           </div>
           <div class="" id="snackbar">
             <div id="error">
@@ -389,6 +404,9 @@
       </div>
     </div>
     <div class="container main">
+      <!--<div class="slim section">
+        <div class="content tab-bar"></div>
+      </div>
       <div class="slim section">
         <div class="content">
           <div class="info">
@@ -407,8 +425,8 @@
             <div id="readMoreSORKK" class="hide">
               <h2>Situation (omständigheter, utlösande faktor):</h2>
               <p>
-                Här tar du upp de situationer då du prokrastinering genom att för
-                varje situation skriva upp:
+                Här tar du upp de situationer då du prokrastinering genom att
+                för varje situation skriva upp:
               </p>
               <ul>
                 <li>När hände det?</li>
@@ -421,8 +439,8 @@
                 kroppen):
               </h2>
               <p>
-                Här ska du identifiera de reaktioner som väcks inom dig som leder
-                till att du prokrastinerar genom att ta upp:
+                Här ska du identifiera de reaktioner som väcks inom dig som
+                leder till att du prokrastinerar genom att ta upp:
               </p>
               <ul>
                 <li>
@@ -443,9 +461,10 @@
                   <ul>
                     <li>
                       Vad upplevde du för känsla? Känslor kan beskrivas med ett
-                      ord (t.ex. arg, irriterad, glad, ledsen, förbannad, sorgsen,
-                      ångestfylld, rädd, orolig, panikslagen, skamsen, besviken,
-                      skuldfylld, äcklad, generad, intresserad, lugn, sårad osv.).
+                      ord (t.ex. arg, irriterad, glad, ledsen, förbannad,
+                      sorgsen, ångestfylld, rädd, orolig, panikslagen, skamsen,
+                      besviken, skuldfylld, äcklad, generad, intresserad, lugn,
+                      sårad osv.).
                     </li>
                     <li>Hur stark var den känslan (0-10)?</li>
                     <li>Hur länge satt den i?</li>
@@ -491,7 +510,8 @@
               </p>
               <p>
                 Text av Aseel Berglund hämtad från
-                <a href="https://www.ida.liu.se/~TDDD84/sjalvmotivation/SORKK.pdf"
+                <a
+                  href="https://www.ida.liu.se/~TDDD84/sjalvmotivation/SORKK.pdf"
                   >https://www.ida.liu.se/~TDDD84/sjalvmotivation/SORKK.pdf</a
                 >
                 den 24 November 2022.
@@ -501,64 +521,123 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="section">
+      </div> -->
+      <div class="section" id="cardDeckContainer">
         <div class="content" id="cardDeck">
           <div class="card">
-            <h2>Ingående Känsla</h2>
+            <div><label for="when">Tidpunkt:</label> <input type="datetime-local" id="when" /></div>
+            <h2><label for="ingoingFeeling">Ingående Känsla</label></h2>
             <textarea id="ingoingFeeling" class="editModeOnly"></textarea>
             <p id="ingoingFeelingP" class="viewModeOnly readOnly hide"></p>
           </div>
           <div class="card">
             <h2>Situation</h2>
-            <textarea id="situation" class="editModeOnly"></textarea>
-            <p id="situationP" class="viewModeOnly readOnly hide"></p>
+            <h3><label for="persons">Inblandande personer</label></h3>
+            <textarea id="persons" class="editModeOnly"></textarea>
+            <p id="personsP" class="viewModeOnly readOnly hide"></p>
+            <h3><label for="lapse">Förlopp</label></h3>
+            <textarea id="lapse" class="editModeOnly"></textarea>
+            <p id="lapseP" class="viewModeOnly readOnly hide"></p>
           </div>
           <div class="card">
             <h2>Organism</h2>
-            <h3>Vad tänker jag?</h3>
+            <h3><label for="whatDoIThink">Vad tänker jag?</label></h3>
             <textarea id="whatDoIThink" class="editModeOnly"></textarea>
             <p id="whatDoIThinkP" class="viewModeOnly readOnly hide"></p>
-            <h3>Vad känner jag?</h3>
+            <h3><label for="whatDoIFeel">Vad känner jag?</label> </h3>
             <textarea id="whatDoIFeel" class="editModeOnly"></textarea>
             <p id="whatDoIFeelP" class="viewModeOnly readOnly hide"></p>
-            <h3>Vad får jag för fysiska reaktioner?</h3>
+            <h3><label for="bodyReactions">Vad får jag för fysiska reaktioner?</label></h3>
             <textarea id="bodyReactions" class="editModeOnly"></textarea>
             <p id="bodyReactionsP" class="viewModeOnly readOnly hide"></p>
+            <h3>Vilken färdighet hos mig påverkas?</h3>
+            <div>
+              <input
+                type="checkbox"
+                id="self-esteem"
+                name="affectedAbilities"
+                value="Självkänsla"
+              />
+              <label for="self-esteem">Självkänsla</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="self-confidence"
+                name="affectedAbilities"
+                value="Självförtroende"
+              />
+              <label for="self-confidence">Självförtroende</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="self-reliance"
+                name="affectedAbilities"
+                value="Självtillit"
+              />
+              <label for="self-reliance">Självtillit</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="prestige"
+                name="affectedAbilities"
+                value="Prestige"
+              />
+              <label for="prestige">Prestige</label>
+            </div>
           </div>
           <div class="card">
-            <h2>Reaktion</h2>
+            <h2><label for="reaction">Reaktion</label></h2>
             <textarea id="reaction" class="editModeOnly"></textarea>
             <p id="reactionP" class="viewModeOnly readOnly hide"></p>
           </div>
           <div class="card">
             <h2>Konsekvens</h2>
-            <h3>Kort Konsekvens</h3>
+            <h3><label for="shortConsequence">Kort Konsekvens</label></h3>
             <textarea id="shortConsequence" class="editModeOnly"></textarea>
             <p id="shortConsequenceP" class="viewModeOnly readOnly hide"></p>
-            <h3>Långsiktig Konsekvens</h3>
+            <h3><label for="longConsequence">Långsiktig Konsekvens</label></h3>
             <textarea id="longConsequence" class="editModeOnly"></textarea>
             <p id="longConsequenceP" class="viewModeOnly readOnly hide"></p>
           </div>
         </div>
+      </div>
+      <div class="section buttons">
+        <div class="content">
+            <a href="javascript:showAllSORKKs()" class="viewModeOnly readOnly hide"
+              >Tillbaka Till Lista</a
+            >
+            <a href="javascript:saveSORKKToList()" class="editModeOnly"
+              >Spara Till Lista</a
+            >
+            <a href="javascript:shareSORKK('endlink')"  class="editModeOnly"
+              >Dela Länk&nbsp;<input type="text" id="endlink" readonly="true"
+            /></a>
+          </div>
       </div>
       <div class="hide section" id="tableContainer">
         <div class="content">
           <table id="sorkkTable" class="transpose">
             <thead>
               <tr>
+                <th scope="col">Tidpunkt</th>
                 <th scope="col">Ingående Känsla</th>
-                <th scope="col">Situation</th>
-                <th colspan="3" scope="colgroup">Organism</th>
+                <th colspan="2" scope="colgroup">Situation</th>
+                <th colspan="4" scope="colgroup">Organism</th>
                 <th scope="col">Reaktion</th>
                 <th colspan="2" scope="colgroup">Konsekvens</th>
               </tr>
               <tr>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col">Inblandande personer</th>
+                <th scope="col">Förlopp</th>
                 <th scope="col">Vad tänker jag?</th>
                 <th scope="col">Vad känner jag?</th>
                 <th scope="col">Vad får jag för fysiska reaktioner?</th>
+                <th scope="col">Vilken färdighet hos mig påverkas?</th>
                 <th scope="col"></th>
                 <th scope="col">Kort</th>
                 <th scope="col">Lång</th>
@@ -575,15 +654,17 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             </tfoot>
           </table>
         </div>
-        
       </div>
       <div class="section">
-      <div class="content spacer"></div>
-    </div>
+        <div class="content spacer"></div>
+      </div>
     </div>
     <div class="container footer">
       <div class="section">

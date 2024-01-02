@@ -27,22 +27,24 @@ function loadSORKK() {
     error("Kunde inte ladda in SORKK:en, ogiltlig text eller URL!");
   }
 
-  decode(data64, isUtf16String).then((sorkkObj) => {
-    if (sorkkObj !== undefined) {
-      if (sorkkObj instanceof Array) {
-        sorkkObj.forEach((sorkk) => {
-          saveSORKKToList(sorkk);
-        });
+  decode(data64, isUtf16String)
+    .then((sorkkObj) => {
+      if (sorkkObj !== undefined) {
+        if (sorkkObj instanceof Array) {
+          sorkkObj.forEach((sorkk) => {
+            saveSORKKToList(sorkk);
+          });
+        } else {
+          saveSORKKToList(sorkkObj);
+        }
+        showAllSORKKs();
       } else {
-        saveSORKKToList(sorkkObj);
+        error("Kunde inte ladda in SORKK:en, ogiltlig text eller URL!");
       }
-      showAllSORKKs();
-    } else {
+    })
+    .catch((_) => {
       error("Kunde inte ladda in SORKK:en, ogiltlig text eller URL!");
-    }
-  }).catch((_) => {
-    error("Kunde inte ladda in SORKK:en, ogiltlig text eller URL!");
-  });
+    });
 }
 
 function readMoreSORKK(obj) {
@@ -61,17 +63,26 @@ function readMoreSORKK(obj) {
   }
 }
 
+function validateFields(sorkkObj) {
+  return {
+    Tidpunkt: Boolean(sorkkObj.timestamp !== ""),
+    "Ingående känsla": Boolean(sorkkObj.ingoingFeeling),
+    Situation: Boolean(sorkkObj.situation),
+    "Vad tänker jag?": Boolean(sorkkObj.organism.whatDoIThink),
+    "Vad känner jag?": Boolean(sorkkObj.organism.whatDoIFeel),
+    "Vad får jag för fysiska reaktioner?": Boolean(
+      sorkkObj.organism.bodyReactions
+    ),
+    Reaktion: Boolean(sorkkObj.reaction),
+    "Kort Konsekvens": Boolean(sorkkObj.consequences.short),
+    "Långsiktig Konsekvens": Boolean(sorkkObj.consequences.long),
+  };
+}
+
 function isEverySORKKFiledPopulated(sorkkObj) {
-  return (
-    sorkkObj.ingoingFeeling &&
-    sorkkObj.situation &&
-    sorkkObj.organism.whatDoIThink &&
-    sorkkObj.organism.whatDoIFeel &&
-    sorkkObj.organism.bodyReactions &&
-    sorkkObj.reaction &&
-    sorkkObj.consequences.short &&
-    sorkkObj.consequences.long
-  );
+  return Object.values(validateFields(sorkkObj)).every((value) => {
+    return value;
+  });
 }
 
 function saveSORKKToList(loadedSork) {
@@ -79,16 +90,30 @@ function saveSORKKToList(loadedSork) {
   sorkkObj = loadedSork || getCurrentSORKK();
 
   if (!isEverySORKKFiledPopulated(sorkkObj)) {
-    error("Fel: Alla fält är inte ifyllda, vänligen fyll i alla!")
+    const validation = Object.entries(validateFields(sorkkObj))
+      .filter((_, valid) => {
+        return !valid;
+      })
+      .map((s, _) => {
+        return s[0];
+      });
+    error(
+      `Fel: Alla fält är inte ifyllda, vänligen fyll i alla! (${validation.join(
+        ", "
+      )})`
+    );
     return;
   }
 
   const tableData = [
+    document.createTextNode(sorkkObj.timestamp || ""),
     document.createTextNode(sorkkObj.ingoingFeeling),
-    document.createTextNode(sorkkObj.situation),
+    document.createTextNode(sorkkObj.situation.persons || ""),
+    document.createTextNode(sorkkObj.situation.lapse || sorkkObj.situation),
     document.createTextNode(sorkkObj.organism.whatDoIThink),
     document.createTextNode(sorkkObj.organism.whatDoIFeel),
     document.createTextNode(sorkkObj.organism.bodyReactions),
+    document.createTextNode(sorkkObj.organism.affectedAbilities || ""),
     document.createTextNode(sorkkObj.reaction),
     document.createTextNode(sorkkObj.consequences.short),
     document.createTextNode(sorkkObj.consequences.long),
@@ -118,14 +143,31 @@ function clearSORKK() {
   }
 }
 
+function getAbilities() {
+  return Array.from({
+    *[Symbol.iterator]() {
+      for (const ab of document
+        .getElementsByName("affectedAbilities")
+        .values()) {
+        if (ab.checked) yield ab.value;
+      }
+    },
+  });
+}
+
 function getCurrentSORKK() {
   return {
+    timestamp: document.getElementById("when").value,
     ingoingFeeling: document.getElementById("ingoingFeeling").value,
-    situation: document.getElementById("situation").value,
+    situation: {
+      persons: document.getElementById("persons").value,
+      lapse: document.getElementById("lapse").value,
+    },
     organism: {
       whatDoIThink: document.getElementById("whatDoIThink").value,
       whatDoIFeel: document.getElementById("whatDoIFeel").value,
       bodyReactions: document.getElementById("bodyReactions").value,
+      affectedAbilities: getAbilities().join(", "),
     },
     reaction: document.getElementById("reaction").value,
     consequences: {
@@ -156,14 +198,11 @@ function getAllSORKKs() {
   }
 }
 
-function shareSORKK() {
+function shareSORKK(textFieldId) {
   const currentSorkk = getCurrentSORKK();
   let sorkkObj = getAllSORKKs() || currentSorkk;
 
-  if (
-    currentSorkk !== currentSorkk &&
-    isEverySORKKFiledPopulated(currentSorkk)
-  ) {
+  if (currentSorkk !== sorkkObj && isEverySORKKFiledPopulated(currentSorkk)) {
     if (sorkkObj instanceof Array) {
       sorkkObj.push(currentSorkk);
     } else {
@@ -181,7 +220,7 @@ function shareSORKK() {
       (result.isUtf16String ? "d" : "s") +
       "=" +
       encodeURIComponent(result.encodedData);
-    const link = document.getElementById("link");
+    const link = document.getElementById(textFieldId);
     link.value = url;
     link.select();
     link.setSelectionRange(0, url.length);
@@ -199,17 +238,16 @@ function shareSORKK() {
 }
 
 function showAllSORKKs() {
+  document.getElementById("tab-table").checked = true;
   disableEditing();
-  document.getElementById("tableContainer").classList.remove("hide");
-  // document.getElementById("cardDeck").classList.replace("container", "hide")
 }
 
 function hideAllSORKKs() {
   enableEditing();
-  document.getElementById("tableContainer").classList.add("hide");
 }
 
 function disableEditing() {
+  disableAbilities();
   const controls = document.getElementsByClassName("editModeOnly");
   for (let i = 0; i < controls.length; i++) {
     console.log("Disable item", controls.item(i));
@@ -222,6 +260,7 @@ function disableEditing() {
 }
 
 function enableEditing() {
+  enableAbilities();
   const controls = document.getElementsByClassName("editModeOnly");
   for (let i = 0; i < controls.length; i++) {
     controls.item(i).classList.remove("hide");
@@ -233,6 +272,7 @@ function enableEditing() {
 }
 
 function enableReadOnly() {
+  disableAbilities();
   const controls = document.getElementsByClassName("editModeOnly");
   for (let i = 0; i < controls.length; i++) {
     controls.item(i).classList.add("hide");
@@ -247,16 +287,49 @@ function enableReadOnly() {
   }
 }
 
+function updateAbilities(sorkkAbilities) {
+  const abilities = sorkkAbilities.split(", ");
+  for (const ab of document.getElementsByName("affectedAbilities").values()) {
+    ab.checked = abilities.includes(ab.value);
+    ab.disabled = true;
+  }
+}
+
+function disableAbilities(clear) {
+  for (const ab of document.getElementsByName("affectedAbilities").values()) {
+    if (clear === true) {
+      ab.checked = false;
+    }
+    ab.disabled = true;
+  }
+}
+
+function enableAbilities() {
+  for (const ab of document.getElementsByName("affectedAbilities").values()) {
+    ab.disabled = false;
+  }
+}
+
 function showSORKK(row, sorkkObj) {
   document.getElementById("ingoingFeelingP").innerText =
     sorkkObj.ingoingFeeling;
-  document.getElementById("situationP").innerText = sorkkObj.situation;
+  document.getElementById("persons").innerText =
+    sorkkObj.situation.persons || "";
+  document.getElementById("lapseP").innerText =
+    sorkkObj.situation.lapse || sorkkObj.situation;
   document.getElementById("whatDoIThinkP").innerText =
     sorkkObj.organism.whatDoIThink;
   document.getElementById("whatDoIFeelP").innerText =
     sorkkObj.organism.whatDoIFeel;
   document.getElementById("bodyReactionsP").innerText =
     sorkkObj.organism.bodyReactions;
+
+  if (sorkkObj.organism.affectedAbilities !== undefined) {
+    updateAbilities(sorkkObj.organism.affectedAbilities);
+  } else {
+    disableAbilities(true);
+  }
+
   document.getElementById("reactionP").innerText = sorkkObj.reaction;
   document.getElementById("shortConsequenceP").innerText =
     sorkkObj.consequences.short;
@@ -270,6 +343,7 @@ function showSORKK(row, sorkkObj) {
       node.classList.remove("selected");
     }
   });
+  document.getElementById("tab-form").checked = true;
 }
 
 function init() {
@@ -292,7 +366,6 @@ function init() {
           }
           showAllSORKKs();
           enableReadOnly();
-          document.getElementById("shareSorkk").classList.add("hide");
         } else {
           error("Kunde inte läsa in SORKK");
         }
@@ -316,7 +389,9 @@ function newSORKK() {
 function error(message) {
   document.getElementById("errorMessage").innerText = message;
 
-  const snackbar = document.getElementById("snackbar")
+  const snackbar = document.getElementById("snackbar");
   snackbar.classList.add("show");
-  setTimeout(function() { snackbar.classList.remove("show"); }, 3000);
+  setTimeout(function () {
+    snackbar.classList.remove("show");
+  }, 3000);
 }
